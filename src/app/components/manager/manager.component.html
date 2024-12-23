@@ -1,0 +1,116 @@
+<div class="manager-container">
+    <div class="header-container">
+        <div class="shop-text">
+            მაღაზია
+        </div>
+        <div class="manager-text">
+            მენეჯერი
+        </div>
+    </div>
+    <div class="sub-header-container">
+        <div class="image-container">
+
+        </div>
+        <div class="image-text-container">
+            წიგნების ჩამონათვალი
+        </div>
+    </div>
+    <div class="body-container">
+        <p-dialog class="add-book-dialog" header="წიგნის დამატება" [(visible)]="addBookDisplay" [modal]="true" [style]="{width: '50vw', height: '20vw', backgroundColor: '#ffffff', color: '#333'}" [closable]="true" (onHide)="onDialogHide()">
+            <div class="dialog-content">
+                <div class="fields-content">
+                    <div class="input-field">
+                        <label class="name-label">დასახელება</label>
+                        <input class="name-input" [(ngModel)]="nameValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="price-label">ფასი</label>
+                        <input type="number" class="price-input" [(ngModel)]="priceValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="author-label">ავტორი</label>
+                        <input class="author-input" [(ngModel)]="authorValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="quantity-label">რაოდენობა</label>
+                        <div class="quantity-controller">
+                            <button (click)="quantityValue = quantityValue - 1">-</button>
+                            <input type="number" [(ngModel)]="quantityValue">
+                            <button (click)="quantityValue = quantityValue + 1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-book-button">
+                    <button (click)="addBook()">დამატება</button>
+                </div>
+            </div>
+        </p-dialog>
+        <p-dialog class="edit-book-dialog" header="რედაქტირება" [(visible)]="editBookDisplay" [modal]="true" [style]="{width: '50vw', height: '20vw', backgroundColor: '#ffffff', color: '#333'}" [closable]="true" (onHide)="onDialogHide()">
+            <div class="dialog-content">
+                <div class="fields-content">
+                    <div class="input-field">
+                        <label class="name-label">დასახელება</label>
+                        <input class="name-input" [(ngModel)]="nameValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="price-label">ფასი</label>
+                        <input type="number" class="price-input" [(ngModel)]="priceValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="author-label">ავტორი</label>
+                        <input class="author-input" [(ngModel)]="authorValue">
+                    </div>
+                    <div class="input-field">
+                        <label class="quantity-label">რაოდენობა</label>
+                        <div class="quantity-controller">
+                            <button (click)="quantityValue = quantityValue - 1" disabled=true>-</button>
+                            <input type="number" [(ngModel)]="quantityValue" disabled="true">
+                            <button (click)="quantityValue = quantityValue + 1" disabled=true>+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-book-button">
+                    <button (click)="editBook()">შენახვა</button>
+                    <button (click)="deleteBook()">წაშლა</button>
+                </div>
+            </div>
+        </p-dialog>
+        <div class="table-container">
+            <p-table [value]="books!" [paginator]="true" [rows]="3" [responsiveLayout]="'scroll'" [globalFilterFields]="['name', 'quantity', 'author', 'price']">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="name">დასახელება<p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">რაოდენობა<p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="author">ავტორი<p-sortIcon field="author"></p-sortIcon></th>
+                    <th pSortableColumn="price">ფასი<p-sortIcon field="price"></p-sortIcon></th>
+                  </tr>
+                  <tr>
+                    <th>
+                      <input pInputText type="text" (input)="applyFilter($event, 'name')" placeholder="Search by name">
+                    </th>
+                    <th>
+                      <input pInputText type="text" (input)="applyFilter($event, 'quantity')" placeholder="Search by quantity">
+                    </th>
+                    <th>
+                      <input pInputText type="text" (input)="applyFilter($event, 'author')" placeholder="Search by author">
+                    </th>
+                    <th>
+                      <input pInputText type="text" (input)="applyFilter($event, 'price')" placeholder="Search by Price">
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-book>
+                  <tr (click)="showEditBookDialog(book)">
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.quantity }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.price }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+        </div>
+    </div>
+    <div class="footer-container">
+        <button pButton type="button" label="+ წიგნის დამატება" (click)="showAddBookDialog()"></button>
+    </div>
+</div>

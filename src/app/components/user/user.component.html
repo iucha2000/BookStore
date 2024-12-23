@@ -1,0 +1,32 @@
+<div class="user-container">
+    <div class="header-container">
+        <div class="shop-text">
+            მაღაზია
+        </div>
+        <div class="user-text">
+            მომხმარებელი
+        </div>
+    </div>
+    <div class="sub-header-container">
+        <div class="image-and-text-container">
+            <div class="image-container">
+            </div>
+            <div class="image-text-container">
+                წიგნების ჩამონათვალი
+            </div>
+        </div>
+        <div class="user-name-field-container">
+            <label>შეიყვანეთ თქვენი სახელი და გვარი</label>
+            <input type="text" [(ngModel)]="username">
+        </div>
+        <div class="cart-info-container">
+            <!-- <app-cart *ngIf="username != ''" [username] = "username"></app-cart> -->
+            <button [disabled]="username==''" routerLink="/cart" [queryParams]="{ user: username}">ჩემი კალათა / შეკვეთები {{count}}</button>
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="book-container" *ngFor="let book of books">
+            <app-book-card [book] = "book" [username] = "username!"></app-book-card>
+        </div>
+    </div>
+</div>

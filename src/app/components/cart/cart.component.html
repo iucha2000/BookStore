@@ -1,0 +1,56 @@
+<div class="cart-container">
+    <div class="header-container">
+        <div class="shop-text">
+            მაღაზია
+        </div>
+        <div class="manager-text">
+            მომხმარებელი
+        </div>
+    </div>
+    <div class="sub-header-container">
+        <div class="image-container">
+
+        </div>
+        <div class="image-text-container">
+            ჩემი კალათა / შეკვეთები {{orders?.length}}
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="table-container">
+            <p-table [value]="orders!" [paginator]="true" [rows]="3" [responsiveLayout]="'scroll'">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="book.name">დასახელება<p-sortIcon field="book.name"></p-sortIcon></th>
+                    <th pSortableColumn="book.quantity">რაოდენობა<p-sortIcon field="book.quantity"></p-sortIcon></th>
+                    <th pSortableColumn="book.author">ავტორი<p-sortIcon field="book.author"></p-sortIcon></th>
+                    <th pSortableColumn="book.price">ფასი<p-sortIcon field="book.price"></p-sortIcon></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-order>
+                  <tr>
+                    <td>{{ order.book.name }}</td>
+                    <td>{{ order.orderQuantity }}</td>
+                    <td>{{ order.book.author }}</td>
+                    <td>{{ order.book.price }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="sum-container">
+            <div class="sum-text">
+                ჯამი:
+            </div>
+            <div class="sum-value">
+                {{sum}}
+            </div>
+        </div>
+        <div class="order-button">
+            <button>შეკვეთა</button>
+        </div>
+        <div class="cancel-button">
+            <button routerLink="/user">გაუქმება</button>
+        </div>
+    </div>
+</div>
